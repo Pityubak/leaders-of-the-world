@@ -1,0 +1,108 @@
+scalar Upload
+
+
+type Leader{
+	id:ID!
+	name:String!
+	timeInterval:String!
+	description:String!
+	avatar:String
+	likes:Int!
+	dislikes:Int!
+	badges:[Badge!]
+	countries:[Country!]
+}
+type Country{
+	id:ID!,
+	fullName:String!,
+	shortName:String!
+	leaders:[Leader!]
+}
+
+ type Badge{
+	id:ID!
+	label:String!
+	leaders:[Leader!]
+}
+
+input CreateLeaderInput{
+	name:String!
+	timeInterval:String!
+	description:String!
+}
+input UpdateLeaderInput{
+	id:ID!
+	name:String
+	timeInterval:String
+	description:String
+}
+
+
+input ToLeaderRelationInput{
+	childId:ID!
+	leaderId:ID!
+}
+input UpdateBadgeInput{
+	id:ID!
+	label:String!
+}
+
+
+input CreateCountryInput{
+	shortName:String!
+	fullName:String!
+}
+input UpdateCountryInput{
+	id:ID!
+	shortName:String
+	fullName:String
+}
+
+input WhereInput{
+	value:String
+}
+
+type Query{
+	leaders:[Leader!]!
+	leadersBy(name:String!):[Leader!]
+	badges:[Badge!]!
+	badgesBy(label:String!):[Badge!]
+	countries:[Country!]!
+	countriesBy(name:String!):[Country!]
+	countryByShortName(shortName:String!):Country!
+}
+
+
+
+type Mutation{
+
+	
+	createLeader(input:CreateLeaderInput!):Leader
+	updateLeader(input:UpdateLeaderInput!):Leader
+	deleteLeader(id:ID!):Leader
+	addLike(id:ID!):Leader
+	addDislike(id:ID!):Leader
+	
+	updateAvatar(id:ID!, avatar:Upload!): Leader
+	deleteAvatar(id:ID!):Leader
+	
+	addBadgeToLeader(input:ToLeaderRelationInput!):Leader
+	deleteBadgeFromLeader(input:ToLeaderRelationInput!):Badge
+	
+	addCountryToLeader(input:ToLeaderRelationInput!):Leader
+	deleteCountryFromLeader(input:ToLeaderRelationInput!):Country
+	
+	createCountry(input:CreateCountryInput!):Country
+	updateCountry(input:UpdateCountryInput!):Country
+	deleteCountry(id:ID!):Country
+	
+	createBadge(label:String!):Badge
+	updateBadge(input:UpdateBadgeInput):Badge
+	deleteBadge(id:ID!):Badge
+}
+
+
+schema{
+	query:Query
+	mutation:Mutation
+}

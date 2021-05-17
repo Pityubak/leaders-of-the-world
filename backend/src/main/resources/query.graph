@@ -1,0 +1,152 @@
+query AllLeaders {
+  leaders {
+    id
+    name
+    timeInterval
+    countries {
+      id
+      shortName
+      fullName
+    }
+    badges {
+      id
+      label
+    }
+  }
+}
+
+query AllBadges {
+  badges {
+    id
+    label
+    leaders {
+      id
+      name
+    }
+  }
+}
+
+query AllCountries {
+  countries {
+    id
+    shortName
+    fullName
+    leaders {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateLeader {
+  createLeader(input: {name: "Szent István", timeInterval: "999-1012"}) {
+    id
+    name
+    timeInterval
+  }
+}
+
+mutation UpdateLeader {
+  updateLeader(input: {id: "1", name: "Kocsik Józsi", timeInterval: "1000-1010"}) {
+    id
+    name
+  }
+}
+
+mutation DeleteLeader {
+  deleteLeader(id: "1") {
+    id
+    name
+  }
+}
+
+mutation AddBadgeToLeader {
+  addBadgeToLeader(input: {childId: 3, leaderId: 1}) {
+    id
+    name
+    timeInterval
+    badges {
+      id
+      label
+    }
+  }
+}
+
+mutation DeleteBadgeFromLeader {
+  deleteBadgeFromLeader(input: {childId: "3", leaderId: 1}) {
+    id
+    label
+    leaders {
+      id
+      name
+    }
+  }
+}
+
+mutation AddCountryToLeader {
+  addCountryToLeader(input: {childId: 4, leaderId: 1}) {
+    id
+    name
+    timeInterval
+    countries {
+      id
+      shortName
+      fullName
+    }
+  }
+}
+
+mutation DeleteCountryFromLeader {
+  deleteCountryFromLeader(input: {childId: 4, leaderId: 1}) {
+    id
+    shortName
+    fullName
+    leaders {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateBadge {
+  createBadge(label: "F*king dope!") {
+    id
+    label
+  }
+}
+
+mutation UpdateBadge {
+  updateBadge(input: {id: "2", label: "Fucking awesome!"}) {
+    id
+    label
+  }
+}
+
+mutation DeleteBadge {
+  deleteBadge(id: "2") {
+    id
+    label
+  }
+}
+
+mutation CreateCountry {
+  createCountry(input: {shortName: "HU", fullName: "Hungary"}) {
+    id
+    shortName
+    fullName
+  }
+}
+
+mutation UpdateCountry {
+  updateCountry(input: {id: "3", shortName: "HU", fullName: "Humbala"}) {
+    id
+    shortName
+    fullName
+  }
+}
+
+mutation DeleteCountry {
+  deleteCountry(id: "3") {
+    id
+    shortName
+  }

@@ -1,0 +1,31 @@
+graphiql:
+  base-path: /
+  enabled: true
+  endpoint:
+    graphql: /graphql
+  mapping: /graphiql
+  props:
+    resources:
+      query: schema.graphqls
+graphql:
+  servlet:
+    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+    enabled: true
+    exception-handlers-enabled: true
+    mapping: /graphql
+spring:
+  datasource:
+    hikari:
+      auto-commit: false
+    password: 78a89d59b98d274dc376fdb0d40a147e6b105a17007eb082299694642e896807
+    username: qiphejkxjrlnmw
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-54-74-14-109.eu-west-1.compute.amazonaws.com:5432/da5beui1ithqki
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 5MB
+        
